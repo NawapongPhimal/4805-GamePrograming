@@ -60,6 +60,17 @@
                 },
                 {
                     "name": "",
+                    "id": "530b7aed-13fe-4cab-ab6c-f111cddca227",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5ef5652c-457e-4288-a647-fb731c5f1f80",
                     "path": "<Keyboard>/space",
                     "interactions": "",
