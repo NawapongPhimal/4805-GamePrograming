@@ -16,10 +16,12 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private CollectibleColor playerColor;
     [SerializeField] private PlayerAnimatorControll animatorController;
+    [SerializeField] private PlayerAudioController audioController;
 
     [SerializeField] private float Coyotetime = 0.15f;
     private float CoyotetimeCounter;
-    
+    [SerializeField] private GameManager _gameManager;
+
 
 
     #endregion
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded())
         {
-            CoyotetimeCounter = Coyotetime; 
+            CoyotetimeCounter = Coyotetime;
         }
         else
         {
@@ -63,16 +65,18 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
             CoyotetimeCounter = 0f;
+            audioController.PlayJumpSound();
         }
     }
 
-    /*private void TryJump()
+    private void OnQuit(InputValue value)
     {
-        if (!isGrounded()) return;
-        
-    }*/
-
-
+        if (value.isPressed)
+        {
+            _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.LoadMainMenu();
+        }
+    }
 
     #endregion
 
