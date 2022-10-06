@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
     {
         health--;
         displayplayerhealth.HealthUpdate(health);
-        if (health == 0) { LoadMainMenu(); }
+        if (health == 0) 
+        {
+            LoadMainMenu(); 
+        }
         else { Loadlevel(CurrentBuildIndex()); }
     }
 

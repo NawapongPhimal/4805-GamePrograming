@@ -85,6 +85,7 @@ public class Player : MonoBehaviour
     {
         if (player.gameObject.CompareTag("ground")){
             Debug.Log("Is Grounded");
+            audioController.PlayHitground();
         }
     }
 
@@ -106,6 +107,7 @@ public class Player : MonoBehaviour
                     spriteRenderer.color = Color.blue;
                     break;
             }
+            audioController.PlayCollectSound();
         }
     }
 
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
         }
         Debug.DrawRay(boxBound.center + new Vector3(boxBound.extents.x, 0), Vector2.down * (boxBound.extents.y + Height), raycastColor);
         return raycastHit2D.collider != null;
-
+        
     }
     #endregion
 
