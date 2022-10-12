@@ -6,6 +6,7 @@ public class Respawn : MonoBehaviour
 {
     [SerializeField] private float waitingTime;
     [SerializeField] private GameObject itemRespawn;
+    [SerializeField] private PlayerAudioController audioController;
 
     public void RespawnCollectItem()
     {
@@ -19,6 +20,7 @@ public class Respawn : MonoBehaviour
 
         yield return new WaitForSeconds(waitingTime);
         itemRespawn.SetActive(true);
+        audioController.PlayRespawnitem();
 
     }
    
