@@ -8,6 +8,7 @@ public class PlayerCollision : MonoBehaviour
     private Collider2D playerCollider;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private PlayerAudioController audioController;
+    [SerializeField] private ParticleSystem deathParticle;
 
 
     private void Start()
@@ -22,8 +23,9 @@ public class PlayerCollision : MonoBehaviour
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Hazard")))
         {
             Debug.Log("outch");
+            deathParticle.Play();
             audioController.PlayDeathSound();
-            _gameManager.ProcessPlayerDeath();
+            _gameManager.TakeDamage();
             
         }
 

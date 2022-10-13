@@ -6,6 +6,7 @@ public class Collectible : MonoBehaviour
 {
     [SerializeField] private SoCollectible collectibleObject;
     [SerializeField] private Respawn respawnTime;
+    
 
     public CollectibleColor color;
     private void Start()

@@ -35,22 +35,28 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadnextScene());
     }
 
+    private IEnumerator ProcessPlayerDeathDelay()
+    {
+        yield return new WaitForSeconds(1);
+        ProcessPlayerDeath();
+    }
+    
     public void ProcessPlayerDeath()
     {
         health--;
         displayplayerhealth.HealthUpdate(health);
-        if (health == 0) 
+        if (health == 0)
         {
-            LoadMainMenu(); 
+            LoadMainMenu();
         }
         else { Loadlevel(CurrentBuildIndex()); }
     }
-
+    
     public void TakeDamage()
     {
-        ProcessPlayerDeath();
+        StartCoroutine(ProcessPlayerDeathDelay());
+        //ProcessPlayerDeath();
     }
-
 
     private IEnumerator LoadnextScene()
     {
@@ -73,6 +79,7 @@ public class GameManager : MonoBehaviour
         return SceneManager.GetActiveScene().buildIndex;
     }
 
+    
     public void Loadlevel(int Levelindex)
     {
         SceneManager.LoadScene(Levelindex);

@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerAnimatorControll animatorController;
     [SerializeField] private PlayerAudioController audioController;
 
+    [SerializeField] private ParticleSystem collectEffect;
+    [SerializeField] private ParticleSystem jumpEffect;
+    [SerializeField] private ParticleSystem finishEffect;
+
     [SerializeField] private float Coyotetime = 0.15f;
     private float CoyotetimeCounter;
     [SerializeField] private GameManager _gameManager;
@@ -46,7 +50,6 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-        
     }
     #endregion
 
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
     {
         if (player.gameObject.CompareTag("ground")){
             Debug.Log("Is Grounded");
+            jumpEffect.Play();
             audioController.PlayHitground();
         }
     }
@@ -107,11 +111,25 @@ public class Player : MonoBehaviour
                     spriteRenderer.color = Color.blue;
                     break;
             }
+            collectEffect.Play();
             audioController.PlayCollectSound();
+        }
+
+        if (!collision.CompareTag("Finish")) return;
+        {
+            finishEffect.Play();
+        }
+        
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+            collectEffect.Play();
         }
     }
 
-    private bool isGrounded()
+
+        private bool isGrounded()
     {
         float Height = 0.015f;
         Bounds boxBound = PlayerCollision2D.bounds;
